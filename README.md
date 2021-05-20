@@ -1,2 +1,2 @@
 # kaholo-plugin-logicmonitor
-LogicMonitor API integration with Kaholo
+LogicMonitor API integration for Kaholo
