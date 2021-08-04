@@ -1,0 +1,258 @@
+{
+  "name": "LogicMonitor",
+  "type": "executer",
+  "exposeRoute": false,
+  "execProgram": "node",
+  "main": "app.js",
+  "version": "1.0.0",
+  "description":"Integration with LogicMonitor API",
+  "imgUrl": "logo.png",
+  "settings":[
+    {
+      "name": "accountName",
+      "viewName": "Account Name",
+      "type": "string"
+    },
+    {
+      "name":"accessId",
+      "viewName": "Access ID",
+      "type":"string"
+    },
+    {
+      "name":"accessKey",
+      "viewName": "Access Key",
+      "type":"vault"
+    }
+  ],
+  "methods": [
+    {
+      "name": "listAlerts",
+      "viewName": "List Alerts",
+      "params": [
+        {
+          "name": "accountName",
+          "viewName": "Account Name",
+          "type": "string"
+        },
+        {
+          "name":"accessId",
+          "viewName": "Access ID",
+          "type":"string"
+        },
+        {
+          "name":"accessKey",
+          "viewName": "Access Key",
+          "type":"vault"
+        },
+        {
+          "name":"deviceType",
+          "viewName": "Device Type",
+          "type": "options",
+          "options": [
+            {
+              "id": "any",
+              "name": "Any"
+            },
+            {
+              "id": "0",
+              "name": "Regular"
+            },
+            {
+              "id": "2",
+              "name": "AWS"
+            },
+            {
+              "id": "4",
+              "name": "Azure"
+            }
+          ]
+        },
+        {
+          "name":"device",
+          "viewName": "Device",
+          "type": "autocomplete",
+          "autocompleteType":"function",
+          "functionName":"listDevicesAuto"
+        },
+        {
+          "name":"size",
+          "viewName":"Size",
+          "type": "string"
+        },
+        {
+          "name":"offset",
+          "viewName":"Offset",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "getDeviceProperties",
+      "viewName": "Get Device Properties",
+      "params": [
+        {
+          "name": "accountName",
+          "viewName": "Account Name",
+          "type": "string"
+        },
+        {
+          "name":"accessId",
+          "viewName": "Access ID",
+          "type":"string"
+        },
+        {
+          "name":"accessKey",
+          "viewName": "Access Key",
+          "type":"vault"
+        },
+        {
+          "name":"deviceType",
+          "viewName": "Device Type",
+          "type": "options",
+          "options": [
+            {
+              "id": "any",
+              "name": "Any"
+            },
+            {
+              "id": "0",
+              "name": "Regular"
+            },
+            {
+              "id": "2",
+              "name": "AWS"
+            },
+            {
+              "id": "4",
+              "name": "Azure"
+            }
+          ]
+        },
+        {
+          "name":"device",
+          "viewName":"Device",
+          "type": "autocomplete",
+          "autocompleteType":"function",
+          "functionName":"listDevicesAuto"
+        }
+      ]
+    },
+    {
+      "name": "listDevices",
+      "viewName": "List Devices",
+      "params": [
+        {
+          "name": "accountName",
+          "viewName": "Account Name",
+          "type": "string"
+        },
+        {
+          "name":"accessId",
+          "viewName": "Access ID",
+          "type":"string"
+        },
+        {
+          "name":"accessKey",
+          "viewName": "Access Key",
+          "type":"vault"
+        },
+        {
+          "name":"deviceType",
+          "viewName": "Device Type",
+          "type": "options",
+          "options": [
+            {
+              "id": "any",
+              "name": "Any"
+            },
+            {
+              "id": "0",
+              "name": "Regular"
+            },
+            {
+              "id": "2",
+              "name": "AWS"
+            },
+            {
+              "id": "4",
+              "name": "Azure"
+            }
+          ]
+        },
+        {
+          "name":"size",
+          "viewName":"Size",
+          "type": "string"
+        },
+        {
+          "name":"offset",
+          "viewName":"Offset",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "ackAlerts",
+      "viewName": "Acknowledge Alerts",
+      "params": [
+        {
+          "name": "accountName",
+          "viewName": "Account Name",
+          "type": "string"
+        },
+        {
+          "name":"accessId",
+          "viewName": "Access ID",
+          "type":"string"
+        },
+        {
+          "name":"accessKey",
+          "viewName": "Access Key",
+          "type":"vault"
+        },
+        {
+          "name":"deviceType",
+          "viewName": "Device Type",
+          "type": "options",
+          "options": [
+            {
+              "id": "any",
+              "name": "Any"
+            },
+            {
+              "id": "0",
+              "name": "Regular"
+            },
+            {
+              "id": "2",
+              "name": "AWS"
+            },
+            {
+              "id": "4",
+              "name": "Azure"
+            }
+          ]
+        },
+        {
+          "name":"device",
+          "viewName":"Device",
+          "type": "autocomplete",
+          "autocompleteType":"function",
+          "functionName":"listDevicesAuto"
+        },
+        {
+          "name":"alerts",
+          "viewName":"Alerts",
+          "type": "autocomplete",
+          "autocompleteType":"function",
+          "functionName":"listAlertsAuto"
+        },
+        {
+          "name":"comment",
+          "viewName":"Acknowledge Comment",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "kaholo-plugin-logicmonitor",
+  "version": "1.0.0",
+  "description": "Kaholo Integration with LogicMonitor API",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kaholo team (Amit Alon)",
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "2.6.1"
+  }
+}
