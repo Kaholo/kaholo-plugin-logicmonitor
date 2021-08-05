@@ -59,8 +59,13 @@ async function listAlerts(params, settings) {
     return sendRestAPI(params, settings, "GET", `/alert/alerts`, filter);
 }
 
+async function listReports(params, settings) {
+    return sendRestAPI(params, settings, "GET", '/report/reports');
+}
+
 module.exports = {
     sendRestAPI,
     listDevices,
-    listAlerts
+    listAlerts,
+    listReports
 }
