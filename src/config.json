@@ -338,6 +338,11 @@
           "type": "autocomplete",
           "autocompleteType":"function",
           "functionName":"listReportsAuto"
+        },
+        {
+          "name":"receiveEmails",
+          "viewName": "Receive Emails",
+          "type":"text"
         }
       ]
     }

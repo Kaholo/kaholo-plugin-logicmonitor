@@ -1,5 +1,5 @@
 const parsers = require("./parsers");
-const { listAlerts, listDevices } = require("./helpers");
+const { listAlerts, listDevices, listReports } = require("./helpers");
 
 // auto complete helper methods
 
@@ -50,6 +50,7 @@ function listAuto(listFunc, getNameFunc){
 
 module.exports = {
   listDevicesAuto: listAuto(listDevices),
+  listReportsAuto: listAuto(listReports),
 	listAlertsAuto: listAuto(listAlerts, alert => 
     `${alert.id} ${alert.rule} ${alert.monitorObjectName} ` +
     `${alert.resourceTemplateName || ""}`)
