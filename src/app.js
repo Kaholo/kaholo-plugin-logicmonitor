@@ -1,56 +1,60 @@
 const parsers = require("./parsers");
-const { listAlerts, listDevices } = require("./helpers");
+const helpers = require("./helpers");
+const {sendRestAPI} = helpers;
 
-// auto complete helper methods
 
-const MAX_RESULTS = 10;
-
-function mapAutoParams(autoParams){
-  const params = {};
-  autoParams.forEach(param => {
-    params[param.name] = parsers.autocomplete(param.value);
-  });
-  return params;
+async function getDeviceProperties(action, settings) {
+  const deviceId = parsers.autocomplete(action.params.device);
+  if (!deviceId) throw "Must specify device!";
+  return sendRestAPI(action.params, settings, "GET", `/device/devices/${deviceId}/properties`);
 }
 
-/***
- * @returns {Promise<[{id, value}]>} filtered result items
- ***/
-async function handleResult(result, query, getName){
-  const items = result.map(item => {
-    if (item.id && typeof(item.id) === "number") item.id = item.id.toString();
-    const val = getName ? getName(item) :
-                item.name ? item.name :
-                item.displayName ? item.displayName : item.id;
-    return {
-      id:     item.id || val, 
-      value:  val
-    };
-  });
-  return filterItems(items, query);
+async function ackAlerts(action, settings) {
+  const alerts = parsers.autocompleteOrArray(action.params.deviceType);
+  const ackComment = action.params.comment;
+  if (alerts.length < 1 || !ackComment){
+    throw "Didn't provide one of the required parameters";
+  } 
+  return Promise.all(alerts.map(alertId => sendRestAPI(
+    action.params, 
+    settings, 
+    "POST", // http method
+    `/alert/alerts/${alertId}/ack`, // api path
+    undefined, // filter param
+    {ackComment} // body
+  )))
 }
 
-async function filterItems(items, query){
-  if (query){
-    const qWords = query.split(/[. ]/g).map(word => word.toLowerCase()); // split by '.' or ' ' and make lower case
-    items = items.filter(item => qWords.every(word => item.value.toLowerCase().includes(word)));
-    items = items.sort((word1, word2) => word1.value.toLowerCase().indexOf(qWords[0]) - word2.value.toLowerCase().indexOf(qWords[0]));
-  }
-  return items.splice(0, MAX_RESULTS);
+async function getReportProperties(action, settings) {
+  const deviceId = parsers.autocomplete(action.params.device);
+  if (!deviceId) throw "Must specify device!";
+  return sendRestAPI(action.params, settings, "GET", `/device/devices/${deviceId}/properties`);
 }
 
-// auto complete main methods
-function listAuto(listFunc, getNameFunc){
-  return async (query, pluginSettings, triggerParameters) => {
-    const settings = mapAutoParams(pluginSettings), params = mapAutoParams(triggerParameters); 
-    const result = await listFunc(params, settings);
-    return handleResult(result.items, query, getNameFunc);
-  }
+async function runReports(action, settings) {
+  const alerts = parsers.autocompleteOrArray(action.params.deviceType);
+  const ackComment = action.params.comment;
+  if (alerts.length < 1 || !ackComment){
+    throw "Didn't provide one of the required parameters";
+  } 
+  return Promise.all(alerts.map(alertId => sendRestAPI(
+    action.params, 
+    settings, 
+    "POST", // http method
+    `/alert/alerts/${alertId}/ack`, // api path
+    undefined, // filter param
+    {ackComment} // body
+  )))
 }
 
 module.exports = {
-  listDevicesAuto: listAuto(listDevices),
-	listAlertsAuto: listAuto(listAlerts, (alert) => {
-    return `${alert.id} ${alert.rule} ${alert.monitorObjectName} ${alert.resourceTemplateName || ""}`; 
-  })
+  getDeviceProperties,
+  ackAlerts,
+  getReportProperties,
+  runReports,
+  listDevices: (action, settings) => helpers.listDevices(action.params, settings),
+  listAlerts: (action, settings) => helpers.listAlerts(action.params, settings),
+  listReports: (action, settings) => helpers.listReports(action.params, settings),
+  // Autocomplete
+  ...require("./autocomplete")
 }

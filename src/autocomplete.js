@@ -1,5 +1,5 @@
 const parsers = require("./parsers");
-const { sendRestAPI } = require("./helpers");
+const { listAlerts, listDevices } = require("./helpers");
 
 // auto complete helper methods
 
@@ -18,6 +18,7 @@ function mapAutoParams(autoParams){
  ***/
 async function handleResult(result, query, getName){
   const items = result.map(item => {
+    if (item.id && typeof(item.id) === "number") item.id = item.id.toString();
     const val = getName ? getName(item) :
                 item.name ? item.name :
                 item.displayName ? item.displayName : item.id;
@@ -39,33 +40,17 @@ async function filterItems(items, query){
 }
 
 // auto complete main methods
-async function listDevicesAuto(query, pluginSettings, triggerParameters){
-  const settings = mapAutoParams(pluginSettings); 
-  const params = mapAutoParams(triggerParameters); 
-  const deviceType = params.deviceType;
-  let filter;
-  if (deviceType && deviceType !== "Any") filter = {
-      "deviceType": deviceType ? `:${deviceType}` : undefined,
+function listAuto(listFunc, getNameFunc){
+  return async (query, pluginSettings, triggerParameters) => {
+    const settings = mapAutoParams(pluginSettings), params = mapAutoParams(triggerParameters); 
+    const result = await listFunc(params, settings);
+    return handleResult(result.items, query, getNameFunc);
   }
-  const result = await sendRestAPI(params, settings, "GET", `/device/devices`, filter);
-  return handleResult(result, query);
-}
-
-async function listAlertsAuto(query, pluginSettings, triggerParameters){
-  const settings = mapAutoParams(pluginSettings); 
-  const params = mapAutoParams(triggerParameters); 
-  const device = parsers.autocomplete(params.device, true);
-  let filter;
-  if (query || device) filter = {
-      "monitorObjectName": device ? `:${device}` : undefined,
-      "_all": query ? `-${query}` : undefined
-  }
-  params.size = MAX_RESULTS;
-  const result = sendRestAPI(params, settings, "GET", `/alert/alerts`, filter);
-  return handleResult(result, query);
 }
 
 module.exports = {
-  listDevicesAuto,
-	listAlertsAuto
+  listDevicesAuto: listAuto(listDevices),
+	listAlertsAuto: listAuto(listAlerts, alert => 
+    `${alert.id} ${alert.rule} ${alert.monitorObjectName} ` +
+    `${alert.resourceTemplateName || ""}`)
 }

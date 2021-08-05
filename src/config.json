@@ -253,6 +253,93 @@
           "type": "text"
         }
       ]
+    },
+    {
+      "name": "listReports",
+      "viewName": "List Reports",
+      "params": [
+        {
+          "name": "accountName",
+          "viewName": "Account Name",
+          "type": "string"
+        },
+        {
+          "name":"accessId",
+          "viewName": "Access ID",
+          "type":"string"
+        },
+        {
+          "name":"accessKey",
+          "viewName": "Access Key",
+          "type":"vault"
+        },
+        {
+          "name":"size",
+          "viewName":"Size",
+          "type": "string"
+        },
+        {
+          "name":"offset",
+          "viewName":"Offset",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "getReportProperties",
+      "viewName": "Get Report Properties",
+      "params": [
+        {
+          "name": "accountName",
+          "viewName": "Account Name",
+          "type": "string"
+        },
+        {
+          "name":"accessId",
+          "viewName": "Access ID",
+          "type":"string"
+        },
+        {
+          "name":"accessKey",
+          "viewName": "Access Key",
+          "type":"vault"
+        },
+        {
+          "name":"report",
+          "viewName":"Report",
+          "type": "autocomplete",
+          "autocompleteType":"function",
+          "functionName":"listReportsAuto"
+        }
+      ]
+    },
+    {
+      "name": "runReports",
+      "viewName": "Run Reports",
+      "params": [
+        {
+          "name": "accountName",
+          "viewName": "Account Name",
+          "type": "string"
+        },
+        {
+          "name":"accessId",
+          "viewName": "Access ID",
+          "type":"string"
+        },
+        {
+          "name":"accessKey",
+          "viewName": "Access Key",
+          "type":"vault"
+        },
+        {
+          "name":"reports",
+          "viewName":"Reports",
+          "type": "autocomplete",
+          "autocompleteType":"function",
+          "functionName":"listReportsAuto"
+        }
+      ]
     }
   ]
 }
