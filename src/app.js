@@ -10,7 +10,7 @@ async function getDeviceProperties(action, settings) {
 }
 
 async function ackAlerts(action, settings) {
-  const alerts = parsers.autocompleteOrArray(action.params.deviceType);
+  const alerts = parsers.autocompleteOrArray(action.params.alerts);
   const ackComment = action.params.comment;
   if (alerts.length < 1 || !ackComment){
     throw "Didn't provide one of the required parameters";
