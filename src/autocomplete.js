@@ -44,7 +44,7 @@ function listAuto(listFunc, getNameFunc){
   return async (query, pluginSettings, triggerParameters) => {
     const settings = mapAutoParams(pluginSettings), params = mapAutoParams(triggerParameters); 
     const result = await listFunc(params, settings);
-    return handleResult(result.items, query, getNameFunc);
+    return handleResult(result.items || [], query, getNameFunc);
   }
 }
 
