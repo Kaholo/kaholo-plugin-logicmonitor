@@ -51,7 +51,7 @@ function listAuto(listFunc, getNameFunc){
 module.exports = {
   listDevicesAuto: listAuto(listDevices),
   listReportsAuto: listAuto(listReports),
-	listAlertsAuto: listAuto(listAlerts, alert => 
-    `${alert.id} ${alert.rule} ${alert.monitorObjectName} ` +
-    `${alert.resourceTemplateName || ""}`)
+	listAlertsAuto: listAuto((params, settings) => listAlerts(params, settings, true), 
+    alert =>  `${alert.id} ${alert.rule} ${alert.monitorObjectName} ` +
+              `${alert.resourceTemplateName || ""}`)
 }
