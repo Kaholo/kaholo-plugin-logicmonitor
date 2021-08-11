@@ -44,14 +44,14 @@ function listAuto(listFunc, getNameFunc){
   return async (query, pluginSettings, triggerParameters) => {
     const settings = mapAutoParams(pluginSettings), params = mapAutoParams(triggerParameters); 
     const result = await listFunc(params, settings);
-    return handleResult(result.items, query, getNameFunc);
+    return handleResult(result.items || [], query, getNameFunc);
   }
 }
 
 module.exports = {
   listDevicesAuto: listAuto(listDevices),
   listReportsAuto: listAuto(listReports),
-	listAlertsAuto: listAuto(listAlerts, alert => 
-    `${alert.id} ${alert.rule} ${alert.monitorObjectName} ` +
-    `${alert.resourceTemplateName || ""}`)
+	listAlertsAuto: listAuto((params, settings) => listAlerts(params, settings, true), 
+    alert =>  `${alert.id} ${alert.rule} ${alert.monitorObjectName} ` +
+              `${alert.resourceTemplateName || ""}`)
 }

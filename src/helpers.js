@@ -53,10 +53,12 @@ async function listDevices(params, settings) {
     return sendRestAPI(params, settings, "GET", `/device/devices`, filter);
 }
 
-async function listAlerts(params, settings) {
+async function listAlerts(params, settings, unAcked) {
     const device = parsers.autocomplete(params.device);
-    const filter = device ? {deviceId: `:${device}`} : undefined;
-    return sendRestAPI(params, settings, "GET", `/alert/alerts`, filter);
+    const filters = {};
+    if (device) filters.deviceId = `:${device}`;
+    if (unAcked) filters.acked = ":false";
+    return sendRestAPI(params, settings, "GET", `/alert/alerts`, filters);
 }
 
 async function listReports(params, settings) {
