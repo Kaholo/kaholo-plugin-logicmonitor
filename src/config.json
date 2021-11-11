@@ -4,9 +4,11 @@
   "exposeRoute": false,
   "execProgram": "node",
   "main": "app.js",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description":"Integration with LogicMonitor API",
   "imgUrl": "logo.png",
+  "category": "MONITORING",
+  "keywords": ["ticket", "card", "troubleticket", "malfunction", "incident", "notification", "sprint", "report", "alert", "device"],
   "settings":[
     {
       "name": "accountName",
@@ -45,6 +47,13 @@
           "type":"vault"
         },
         {
+          "name":"deviceGroup",
+          "viewName": "Device Group",
+          "type": "autocomplete",
+          "autocompleteType":"function",
+          "functionName":"listDeviceGroupsAuto"
+        },
+        {
           "name":"deviceType",
           "viewName": "Device Type",
           "type": "options",
@@ -73,6 +82,26 @@
           "type": "autocomplete",
           "autocompleteType":"function",
           "functionName":"listDevicesAuto"
+        },
+        {
+          "name":"fromStart",
+          "viewName":"From Start Time",
+          "type": "string",
+          "placeholder": "2021-10-28 17:19:56 GMT",
+          "description": "If specified, only return alerts which started after the specified time. Can only specify "
+        },
+        {
+          "name":"untilStart",
+          "viewName":"Until Start Time",
+          "type": "string",
+          "placeholder": "2021-10-28 17:19:56 GMT",
+          "description": "If specified, only return alerts which started before the specified time."
+        },
+        {
+          "name":"unacked",
+          "viewName":"Return Only Unacknowledged",
+          "type": "boolean",
+          "description": "If specified, only return alerts which weren't acknowledged."
         },
         {
           "name":"size",
@@ -104,6 +133,13 @@
           "name":"accessKey",
           "viewName": "Access Key",
           "type":"vault"
+        },
+        {
+          "name":"deviceGroup",
+          "viewName": "Device Group",
+          "type": "autocomplete",
+          "autocompleteType":"function",
+          "functionName":"listDeviceGroupsAuto"
         },
         {
           "name":"deviceType",
@@ -155,6 +191,13 @@
           "name":"accessKey",
           "viewName": "Access Key",
           "type":"vault"
+        },
+        {
+          "name":"deviceGroup",
+          "viewName": "Device Group",
+          "type": "autocomplete",
+          "autocompleteType":"function",
+          "functionName":"listDeviceGroupsAuto"
         },
         {
           "name":"deviceType",
@@ -209,6 +252,13 @@
           "name":"accessKey",
           "viewName": "Access Key",
           "type":"vault"
+        },
+        {
+          "name":"deviceGroup",
+          "viewName": "Device Group",
+          "type": "autocomplete",
+          "autocompleteType":"function",
+          "functionName":"listDeviceGroupsAuto"
         },
         {
           "name":"deviceType",
@@ -343,6 +393,37 @@
           "name":"receiveEmails",
           "viewName": "Receive Emails",
           "type":"text"
+        }
+      ]
+    },
+    {
+      "name": "listDeviceGroups",
+      "viewName": "List Device Groups",
+      "params": [
+        {
+          "name": "accountName",
+          "viewName": "Account Name",
+          "type": "string"
+        },
+        {
+          "name":"accessId",
+          "viewName": "Access ID",
+          "type":"string"
+        },
+        {
+          "name":"accessKey",
+          "viewName": "Access Key",
+          "type":"vault"
+        },
+        {
+          "name":"size",
+          "viewName":"Size",
+          "type": "string"
+        },
+        {
+          "name":"offset",
+          "viewName":"Offset",
+          "type": "string"
         }
       ]
     }
