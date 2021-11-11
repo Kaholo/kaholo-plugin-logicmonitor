@@ -58,7 +58,7 @@ module.exports = {
     },
     datetime: (value)=>{
         if (!value) return undefined;
-        if (date instanceof Date) return date;
+        if (value instanceof Date) return value;
         if (typeof(value) == "string"){
             return Date.parse(value);
         }
