@@ -36,13 +36,33 @@ module.exports = {
     },
     object: (value)=>{
         if (!value) return undefined;
-        if (typeof(value) !== "object") throw `Value ${value} is not an object`;
-        return value;
+        if (typeof(value) === "object") return value;
+        if (typeof(value) == "string") {
+            try {
+                return JSON.parse(value);
+            }
+            catch (e) {}
+            return value.split("\n").reduce((prev, cur) => {
+                let [key, ...val] = cur.trim().split("=");
+                if (!key || !val) throw "bad object format";
+                if (Array.isArray(val)) val = val.join("=");
+                prev[key] = val;
+            }, {});
+        }
+        throw `Value ${value} is not an object`;
     },
     string: (value)=>{
         if (!value) return undefined;
         if (typeof(value) === "string") return value.trim();
         throw `Value ${value} is not a valid string`;
+    },
+    datetime: (value)=>{
+        if (!value) return undefined;
+        if (date instanceof Date) return date;
+        if (typeof(value) == "string"){
+            return Date.parse(value);
+        }
+        throw `Value '${value}' is not a valid Date`;
     },
     array: parseArray
 }

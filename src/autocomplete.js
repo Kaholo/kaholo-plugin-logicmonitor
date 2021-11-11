@@ -1,5 +1,5 @@
 const parsers = require("./parsers");
-const { listAlerts, listDevices, listReports } = require("./helpers");
+const LogicMonitorService = require("./logicmonitor.service");
 
 // auto complete helper methods
 
@@ -42,16 +42,29 @@ async function filterItems(items, query){
 // auto complete main methods
 function listAuto(listFunc, getNameFunc){
   return async (query, pluginSettings, triggerParameters) => {
-    const settings = mapAutoParams(pluginSettings), params = mapAutoParams(triggerParameters); 
-    const result = await listFunc(params, settings);
-    return handleResult(result.items || [], query, getNameFunc);
+    const settings = mapAutoParams(pluginSettings), params = mapAutoParams(triggerParameters);
+    const client = LogicMonitorService.from(params, settings);
+    const bufferSize = 100, items = [];
+    var lastResult, offset = 0;
+    do {
+      lastResult = await client[listFunc]({
+        ...params,
+        size: bufferSize,
+        offset
+      });
+      items.push(...handleResult(lastResult.items || [], query, getNameFunc));
+      offset += bufferSize;
+    } while (items.length < MAX_RESULTS && lastResult.items && lastResult.items.length == bufferSize);
+    return items;
   }
 }
 
+const getAlertDisplayName = alert => `${alert.id} ${alert.rule} ${alert.monitorObjectName} ${alert.resourceTemplateName || ""}`;
+
 module.exports = {
-  listDevicesAuto: listAuto(listDevices),
-  listReportsAuto: listAuto(listReports),
-	listAlertsAuto: listAuto((params, settings) => listAlerts(params, settings, true), 
-    alert =>  `${alert.id} ${alert.rule} ${alert.monitorObjectName} ` +
-              `${alert.resourceTemplateName || ""}`)
+  listDevicesAuto: listAuto("listDevices"),
+  listReportsAuto: listAuto("listReports"),
+	listAlertsAuto: listAuto("listAlerts", getAlertDisplayName),
+	listUnackedAlertsAuto: listAuto("listUnackedAlerts", getAlertDisplayName),
+	listDeviceGroupsAuto: listAuto("listDeviceGroups")
 }
