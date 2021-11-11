@@ -22,7 +22,7 @@ module.exports = class LogicMonitorService{
         // Create Auth Creds
         const epoch = (new Date).getTime();
         // Construct signature 
-        const requestVars = httpMethod + epoch + (body || "") + path;
+        const requestVars = httpMethod + epoch + (body || "") + "/" + path;
         const hex = crypto.createHmac("sha256", this.accessKey).update(requestVars).digest("hex");
         const signature = Buffer.from(hex).toString('base64');
         // Construct auth header

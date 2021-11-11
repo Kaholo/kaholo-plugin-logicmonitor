@@ -14,9 +14,9 @@ function mapAutoParams(autoParams){
 }
 
 /***
- * @returns {Promise<[{id, value}]>} filtered result items
+ * @returns {[{id, value}]} filtered result items
  ***/
-async function handleResult(result, query, getName){
+function handleResult(result, query, getName){
   const items = result.map(item => {
     if (item.id && typeof(item.id) === "number") item.id = item.id.toString();
     const val = getName ? getName(item) :
@@ -30,13 +30,13 @@ async function handleResult(result, query, getName){
   return filterItems(items, query);
 }
 
-async function filterItems(items, query){
+function filterItems(items, query){
   if (query){
     const qWords = query.split(/[. ]/g).map(word => word.toLowerCase()); // split by '.' or ' ' and make lower case
     items = items.filter(item => qWords.every(word => item.value.toLowerCase().includes(word)));
     items = items.sort((word1, word2) => word1.value.toLowerCase().indexOf(qWords[0]) - word2.value.toLowerCase().indexOf(qWords[0]));
   }
-  return items.splice(0, MAX_RESULTS);
+  return items.slice(0, MAX_RESULTS);
 }
 
 // auto complete main methods
