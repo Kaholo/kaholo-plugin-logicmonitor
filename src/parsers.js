@@ -58,11 +58,12 @@ module.exports = {
     },
     datetime: (value)=>{
         if (!value) return undefined;
-        if (value instanceof Date) return value;
-        if (typeof(value) == "string"){
+        try{
             return Date.parse(value);
         }
-        throw `Value '${value}' is not a valid Date`;
+        catch(e){
+            throw `Value '${value}' is not a valid Date`;
+        }
     },
     array: parseArray
 }
