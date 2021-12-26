@@ -4,26 +4,37 @@
   "exposeRoute": false,
   "execProgram": "node",
   "main": "app.js",
-  "version": "1.1.0",
-  "description":"Integration with LogicMonitor API",
+  "version": "1.1.2",
+  "description": "Integration with LogicMonitor API",
   "imgUrl": "logo.png",
   "category": "MONITORING",
-  "keywords": ["ticket", "card", "troubleticket", "malfunction", "incident", "notification", "sprint", "report", "alert", "device"],
-  "settings":[
+  "keywords": [
+    "ticket",
+    "card",
+    "troubleticket",
+    "malfunction",
+    "incident",
+    "notification",
+    "sprint",
+    "report",
+    "alert",
+    "device"
+  ],
+  "settings": [
     {
       "name": "accountName",
       "viewName": "Account Name",
       "type": "string"
     },
     {
-      "name":"accessId",
+      "name": "accessId",
       "viewName": "Access ID",
-      "type":"string"
+      "type": "string"
     },
     {
-      "name":"accessKey",
+      "name": "accessKey",
       "viewName": "Access Key",
-      "type":"vault"
+      "type": "vault"
     }
   ],
   "methods": [
@@ -37,24 +48,24 @@
           "type": "string"
         },
         {
-          "name":"accessId",
+          "name": "accessId",
           "viewName": "Access ID",
-          "type":"string"
+          "type": "string"
         },
         {
-          "name":"accessKey",
+          "name": "accessKey",
           "viewName": "Access Key",
-          "type":"vault"
+          "type": "vault"
         },
         {
-          "name":"deviceGroup",
+          "name": "deviceGroup",
           "viewName": "Device Group",
           "type": "autocomplete",
-          "autocompleteType":"function",
-          "functionName":"listDeviceGroupsAuto"
+          "autocompleteType": "function",
+          "functionName": "listDeviceGroupsAuto"
         },
         {
-          "name":"deviceType",
+          "name": "deviceType",
           "viewName": "Device Type",
           "type": "options",
           "options": [
@@ -77,40 +88,40 @@
           ]
         },
         {
-          "name":"device",
+          "name": "device",
           "viewName": "Device",
           "type": "autocomplete",
-          "autocompleteType":"function",
-          "functionName":"listDevicesAuto"
+          "autocompleteType": "function",
+          "functionName": "listDevicesAuto"
         },
         {
-          "name":"fromStart",
-          "viewName":"From Start Time",
+          "name": "fromStart",
+          "viewName": "From Start Time",
           "type": "string",
           "placeholder": "2021-10-28 17:19:56 GMT",
           "description": "If specified, only return alerts which started after the specified time. Can only specify "
         },
         {
-          "name":"untilStart",
-          "viewName":"Until Start Time",
+          "name": "untilStart",
+          "viewName": "Until Start Time",
           "type": "string",
           "placeholder": "2021-10-28 17:19:56 GMT",
           "description": "If specified, only return alerts which started before the specified time."
         },
         {
-          "name":"unacked",
-          "viewName":"Return Only Unacknowledged",
+          "name": "unacked",
+          "viewName": "Return Only Unacknowledged",
           "type": "boolean",
           "description": "If specified, only return alerts which weren't acknowledged."
         },
         {
-          "name":"size",
-          "viewName":"Size",
+          "name": "size",
+          "viewName": "Size",
           "type": "string"
         },
         {
-          "name":"offset",
-          "viewName":"Offset",
+          "name": "offset",
+          "viewName": "Offset",
           "type": "string"
         }
       ]
@@ -125,24 +136,24 @@
           "type": "string"
         },
         {
-          "name":"accessId",
+          "name": "accessId",
           "viewName": "Access ID",
-          "type":"string"
+          "type": "string"
         },
         {
-          "name":"accessKey",
+          "name": "accessKey",
           "viewName": "Access Key",
-          "type":"vault"
+          "type": "vault"
         },
         {
-          "name":"deviceGroup",
+          "name": "deviceGroup",
           "viewName": "Device Group",
           "type": "autocomplete",
-          "autocompleteType":"function",
-          "functionName":"listDeviceGroupsAuto"
+          "autocompleteType": "function",
+          "functionName": "listDeviceGroupsAuto"
         },
         {
-          "name":"deviceType",
+          "name": "deviceType",
           "viewName": "Device Type",
           "type": "options",
           "options": [
@@ -165,11 +176,11 @@
           ]
         },
         {
-          "name":"device",
-          "viewName":"Device",
+          "name": "device",
+          "viewName": "Device",
           "type": "autocomplete",
-          "autocompleteType":"function",
-          "functionName":"listDevicesAuto"
+          "autocompleteType": "function",
+          "functionName": "listDevicesAuto"
         }
       ]
     },
@@ -183,24 +194,24 @@
           "type": "string"
         },
         {
-          "name":"accessId",
+          "name": "accessId",
           "viewName": "Access ID",
-          "type":"string"
+          "type": "string"
         },
         {
-          "name":"accessKey",
+          "name": "accessKey",
           "viewName": "Access Key",
-          "type":"vault"
+          "type": "vault"
         },
         {
-          "name":"deviceGroup",
+          "name": "deviceGroup",
           "viewName": "Device Group",
           "type": "autocomplete",
-          "autocompleteType":"function",
-          "functionName":"listDeviceGroupsAuto"
+          "autocompleteType": "function",
+          "functionName": "listDeviceGroupsAuto"
         },
         {
-          "name":"deviceType",
+          "name": "deviceType",
           "viewName": "Device Type",
           "type": "options",
           "options": [
@@ -223,13 +234,13 @@
           ]
         },
         {
-          "name":"size",
-          "viewName":"Size",
+          "name": "size",
+          "viewName": "Size",
           "type": "string"
         },
         {
-          "name":"offset",
-          "viewName":"Offset",
+          "name": "offset",
+          "viewName": "Offset",
           "type": "string"
         }
       ]
@@ -244,24 +255,24 @@
           "type": "string"
         },
         {
-          "name":"accessId",
+          "name": "accessId",
           "viewName": "Access ID",
-          "type":"string"
+          "type": "string"
         },
         {
-          "name":"accessKey",
+          "name": "accessKey",
           "viewName": "Access Key",
-          "type":"vault"
+          "type": "vault"
         },
         {
-          "name":"deviceGroup",
+          "name": "deviceGroup",
           "viewName": "Device Group",
           "type": "autocomplete",
-          "autocompleteType":"function",
-          "functionName":"listDeviceGroupsAuto"
+          "autocompleteType": "function",
+          "functionName": "listDeviceGroupsAuto"
         },
         {
-          "name":"deviceType",
+          "name": "deviceType",
           "viewName": "Device Type",
           "type": "options",
           "options": [
@@ -284,22 +295,22 @@
           ]
         },
         {
-          "name":"device",
-          "viewName":"Device",
+          "name": "device",
+          "viewName": "Device",
           "type": "autocomplete",
-          "autocompleteType":"function",
-          "functionName":"listDevicesAuto"
+          "autocompleteType": "function",
+          "functionName": "listDevicesAuto"
         },
         {
-          "name":"alerts",
-          "viewName":"Alerts",
+          "name": "alerts",
+          "viewName": "Alerts",
           "type": "autocomplete",
-          "autocompleteType":"function",
-          "functionName":"listAlertsAuto"
+          "autocompleteType": "function",
+          "functionName": "listAlertsAuto"
         },
         {
-          "name":"comment",
-          "viewName":"Acknowledge Comment",
+          "name": "comment",
+          "viewName": "Acknowledge Comment",
           "type": "text"
         }
       ]
@@ -314,23 +325,23 @@
           "type": "string"
         },
         {
-          "name":"accessId",
+          "name": "accessId",
           "viewName": "Access ID",
-          "type":"string"
-        },
-        {
-          "name":"accessKey",
-          "viewName": "Access Key",
-          "type":"vault"
-        },
-        {
-          "name":"size",
-          "viewName":"Size",
           "type": "string"
         },
         {
-          "name":"offset",
-          "viewName":"Offset",
+          "name": "accessKey",
+          "viewName": "Access Key",
+          "type": "vault"
+        },
+        {
+          "name": "size",
+          "viewName": "Size",
+          "type": "string"
+        },
+        {
+          "name": "offset",
+          "viewName": "Offset",
           "type": "string"
         }
       ]
@@ -345,21 +356,21 @@
           "type": "string"
         },
         {
-          "name":"accessId",
+          "name": "accessId",
           "viewName": "Access ID",
-          "type":"string"
+          "type": "string"
         },
         {
-          "name":"accessKey",
+          "name": "accessKey",
           "viewName": "Access Key",
-          "type":"vault"
+          "type": "vault"
         },
         {
-          "name":"report",
-          "viewName":"Report",
+          "name": "report",
+          "viewName": "Report",
           "type": "autocomplete",
-          "autocompleteType":"function",
-          "functionName":"listReportsAuto"
+          "autocompleteType": "function",
+          "functionName": "listReportsAuto"
         }
       ]
     },
@@ -373,26 +384,26 @@
           "type": "string"
         },
         {
-          "name":"accessId",
+          "name": "accessId",
           "viewName": "Access ID",
-          "type":"string"
+          "type": "string"
         },
         {
-          "name":"accessKey",
+          "name": "accessKey",
           "viewName": "Access Key",
-          "type":"vault"
+          "type": "vault"
         },
         {
-          "name":"reports",
-          "viewName":"Reports",
+          "name": "reports",
+          "viewName": "Reports",
           "type": "autocomplete",
-          "autocompleteType":"function",
-          "functionName":"listReportsAuto"
+          "autocompleteType": "function",
+          "functionName": "listReportsAuto"
         },
         {
-          "name":"receiveEmails",
+          "name": "receiveEmails",
           "viewName": "Receive Emails",
-          "type":"text"
+          "type": "text"
         }
       ]
     },
@@ -406,23 +417,23 @@
           "type": "string"
         },
         {
-          "name":"accessId",
+          "name": "accessId",
           "viewName": "Access ID",
-          "type":"string"
-        },
-        {
-          "name":"accessKey",
-          "viewName": "Access Key",
-          "type":"vault"
-        },
-        {
-          "name":"size",
-          "viewName":"Size",
           "type": "string"
         },
         {
-          "name":"offset",
-          "viewName":"Offset",
+          "name": "accessKey",
+          "viewName": "Access Key",
+          "type": "vault"
+        },
+        {
+          "name": "size",
+          "viewName": "Size",
+          "type": "string"
+        },
+        {
+          "name": "offset",
+          "viewName": "Offset",
           "type": "string"
         }
       ]
